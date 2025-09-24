@@ -2,6 +2,7 @@
 
 ﻿string secret = "hydrochlorid";
 bool[] guesses = new bool['z'-'a']; // false -> has not been guessed
+int lives = 10;
 
 // helpers
 
@@ -14,7 +15,6 @@ char int2char (int i) {
 }
 
 void print_status () {
-  
   // guesses
   Console.Write("Guesses: ");
   for (int i=0 ; i<guesses.Length ; i++) {
@@ -31,6 +31,24 @@ void print_status () {
     Console.Write(( guesses[char2int(c)] ? c : '*'));
   }
   Console.WriteLine("");
+  
+  // lives left
+  Console.WriteLine(lives+" lives left");
+}
+
+bool done () {
+  for (int i=0 ; i<secret.Length ; i++) {
+    char c = secret[i];
+    if (!guesses[char2int(c)]) return false;
+  }
+  return true;
+}
+
+bool guess_in_secret (int guess) {
+  foreach (char c in secret) {
+    if (char2int(c) == guess) return true;
+  }
+  return false;
 }
 
 // -- main
@@ -51,6 +69,18 @@ while (true) {
   }
   Console.WriteLine(c);
   
-  guesses[char2int(c)] = true;
+  int guess = char2int(c);
+  if (guesses[guess]==false && !guess_in_secret(guess)) lives--;
+  guesses[guess] = true;
+  
+  if (done()) {
+    Console.WriteLine("Yay!");
+    break;
+  }
+  
+  if (lives==0) {
+    Console.WriteLine("Oh nooo!!!");
+    break;
+  }
 }
 
