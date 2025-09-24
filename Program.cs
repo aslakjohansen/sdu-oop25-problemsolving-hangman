@@ -9,7 +9,7 @@ while (true) {
     Console.WriteLine("Error: Input should be 1 long");
     continue;
   }
-  char c = input[0];
+  char c = Char.ToLower(input[0]);
   Console.WriteLine(c);
 }
 
