@@ -14,6 +14,17 @@ char int2char (int i) {
 }
 
 void print_status () {
+  
+  // guesses
+  Console.Write("Guesses: ");
+  for (int i=0 ; i<guesses.Length ; i++) {
+    if (guesses[i]) {
+      Console.Write(int2char(i));
+    }
+  }
+  Console.WriteLine("");
+  
+  // secret
   Console.Write("Word: ");
   for (int i=0 ; i<secret.Length ; i++) {
     char c = secret[i];
