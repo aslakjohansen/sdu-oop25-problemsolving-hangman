@@ -34,6 +34,10 @@ while (true) {
     continue;
   }
   char c = Char.ToLower(input[0]);
+  if (c<'a' || c>'z') {
+    Console.WriteLine("Only letters acceptable");
+    continue;
+  }
   Console.WriteLine(c);
   
   guesses[char2int(c)] = true;
